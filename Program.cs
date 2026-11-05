@@ -255,7 +255,6 @@ namespace Task_3
                 shapes_input = Array.Empty<Shape>(); //Reset the shape list.
                 Console.Clear();
             } while (choice != 5);
-            stream.Close(); //End the stream, this is here to minimise file locking issues.
         }
     }
 }
