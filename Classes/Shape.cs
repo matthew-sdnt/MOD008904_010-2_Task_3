@@ -16,6 +16,14 @@ namespace Task_3.Classes
         {
             get { return this.name; }
         }
+        public double Length
+        {
+            get { return this.length; }
+        }
+        public double Width
+        {
+            get { return this.width; }
+        }
 
         //Logic
         protected Shape(double p_length, double p_width)
