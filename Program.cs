@@ -77,14 +77,14 @@ namespace Task_3
         {
             for (int i = 0; i < p_shapes_list.Length; i++) //Iterate over the list to print the details alongside the shape number.
             {
-                Console.WriteLine($"{p_shapes_list[i].Name} {i + 1} Area: {p_shapes_list[i].get_area()}");
+                Console.WriteLine($"{p_shapes_list[i].Name} {i + 1} Area: {p_shapes_list[i].get_area():0.00}");
                 if (p_shapes_list[i].Name == "Circle") //Seperate message for circles, as their perimeter is also known as a circumference.
                 {
-                    Console.WriteLine($"{p_shapes_list[i].Name} {i + 1} Perimeter (also known as Circumference): {p_shapes_list[i].get_perimeter()}");
+                    Console.WriteLine($"{p_shapes_list[i].Name} {i + 1} Perimeter (also known as Circumference): {p_shapes_list[i].get_perimeter():0.00}");
                 }
                 else
                 {
-                    Console.WriteLine($"{p_shapes_list[i].Name} {i + 1} Perimeter: {p_shapes_list[i].get_perimeter()}");
+                    Console.WriteLine($"{p_shapes_list[i].Name} {i + 1} Perimeter: {p_shapes_list[i].get_perimeter():0.00}");
                 }
                 Console.Write("\n");
             }
@@ -150,7 +150,8 @@ namespace Task_3
                         shapes_input = new Shape[shape_num];
                         for (int i = 0; i < shapes_input.Length; i++)
                         {
-                            triangle_choice = input_int("1. Scalene\n2. Isosceles\n3. Equilateral", 1, 3);
+                            triangle_choice = input_int("1. Scalene\n2. Isosceles\n3. Equilateral\nChoice: ", 1, 3);
+                            Console.Clear();
 
                             switch (triangle_choice)
                             {
@@ -174,6 +175,7 @@ namespace Task_3
                                     Console.WriteLine("Error, invalid input.");
                                     break;
                             }
+                            Console.Clear();
                         }
 
                         print_shape_list_details(shapes_input);
@@ -193,14 +195,14 @@ namespace Task_3
                                     $"Base Length: {((Triangle)shapes[i]).Sides[0]}\n" +
                                     $"Side 1: {((Triangle)shapes[i]).Sides[0]}\n" +
                                     $"Side 2: {((Triangle)shapes[i]).Sides[2]}\n" +
-                                    $"Area: {shapes[i].get_area}\n" +
-                                    $"Perimeter: {shapes[i].get_area}\n");
+                                    $"Area: {shapes[i].get_area():0.00}\n" +
+                                    $"Perimeter: {shapes[i].get_perimeter():0.00}\n");
                             }
                             else
                             { //Output all known info about the given Shape object.
                                 Console.WriteLine($"Shape {i + 1}: {shapes[i].Name}\n" +
-                                    $"Area: {shapes[i].get_area}\n" +
-                                    $"Perimeter: {shapes[i].get_area}\n");
+                                    $"Area: {shapes[i].get_area():0.00}\n" +
+                                    $"Perimeter: {shapes[i].get_perimeter():0.00}\n");
                             }
                         }
 
@@ -215,7 +217,7 @@ namespace Task_3
                                 stream.WriteLine("Number,Shape Name,Length,Width,Area,Perimeter"); //For most shapes this is all that needs to be stored; for the case of triangles, while there is 3 sides to each triangle, these sides can be worked out from just the base, height, area, and perimeter, and will be worked out upon reuse.
                                 for (int i = 0; i < shapes.Count; i++)
                                 {
-                                    stream.WriteLine($"{i + 1},{shapes[i].Name},{shapes[i].Length},{shapes[i].Width},{shapes[i].get_area()},{shapes[i].get_perimeter()}");
+                                    stream.WriteLine($"{i + 1},{shapes[i].Name},{shapes[i].Length},{shapes[i].Width},{shapes[i].get_area():0.00},{shapes[i].get_perimeter():0.00}");
                                 }
                                 stream.Flush(); //Write the current contents of the stream to the file.
 
@@ -243,8 +245,11 @@ namespace Task_3
                         break;
                 }
 
-                shapes.AddRange(shapes_input);
-                Console.Write($"{shapes_input.Length} shapes written for this session\nPress enter to continue.");
+                if (shapes_input.Length != 0)
+                {
+                    shapes.AddRange(shapes_input);
+                    Console.Write($"{shapes_input.Length} shapes written for this session\nPress enter to continue.");
+                }
                 Console.ReadLine();
 
                 shapes_input = Array.Empty<Shape>(); //Reset the shape list.
