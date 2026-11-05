@@ -20,7 +20,7 @@ namespace Task_3.Classes
         }
         public override double get_area()
         {
-            return (length * width) / 2;
+            return (length * width) / 2; //Where length and width are representative of the base and height of the triangle respectively.
         }
         public override double get_perimeter()
         {
